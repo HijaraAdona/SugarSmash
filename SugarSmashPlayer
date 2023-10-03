@@ -1,0 +1,47 @@
+public class SugarSmashPlayer {
+    private int playerID;
+    private String screenName;
+    private int[] scores;
+
+    public SugarSmashPlayer(int playerID, String screenName) {
+        this.playerID = playerID;
+        this.screenName = screenName;
+        this.scores = new int[10];
+    }
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
+
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public void setScreenName(String screenName) {
+        this.screenName = screenName;
+    }
+
+    public int getScore(int level) {
+        if (level < 1 || level > 10) {
+            System.out.println("Error: Invalid level number");
+            return -1; // Return a default value or handle the error as needed
+        }
+        return scores[level - 1];
+    }
+
+    public void setScore(int level, int score) {
+        if (level < 1 || level > 10) {
+            System.out.println("Error: Invalid level number");
+            return;
+        }
+        if (level > 1 && score < 100) {
+            System.out.println("Error: You must earn at least 100 points at previous levels.");
+            return;
+        }
+        scores[level - 1] = score;
+    }
+}
