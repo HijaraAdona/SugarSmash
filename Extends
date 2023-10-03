@@ -1,0 +1,18 @@
+public class PremiumSugarSmashPlayer extends SugarSmashPlayer {
+    public PremiumSugarSmashPlayer(int playerID, String screenName) {
+        super(playerID, screenName);
+    }
+
+    @Override
+    public void setScore(int level, int score) {
+        if (level < 1 || level > 50) {
+            System.out.println("Error: Invalid level number");
+            return;
+        }
+        if (level > 1 && score < 100) {
+            System.out.println("Error: You must earn at least 100 points at previous levels.");
+            return;
+        }
+        super.setScore(level, score);
+    }
+}
