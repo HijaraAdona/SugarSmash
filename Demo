@@ -1,0 +1,17 @@
+public class DemoSugarSmash {
+    public static void main(String[] args) {
+        // Demonstrate SugarSmashPlayer
+        SugarSmashPlayer player1 = new SugarSmashPlayer(1, "PlayerOne");
+        player1.setScore(1, 150);
+        player1.setScore(2, 200); // This will print an error message
+        int score = player1.getScore(1);
+        System.out.println("Player 1, Level 1 Score: " + score);
+
+        // Demonstrate PremiumSugarSmashPlayer
+        PremiumSugarSmashPlayer premiumPlayer = new PremiumSugarSmashPlayer(2, "PremiumPlayer");
+        premiumPlayer.setScore(1, 120);
+        premiumPlayer.setScore(40, 150); // This will print an error message
+        score = premiumPlayer.getScore(1);
+        System.out.println("Premium Player, Level 1 Score: " + score);
+    }
+}
