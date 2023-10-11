@@ -1,54 +1,12 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class DemoSugarSmash {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Create SugarSmashPlayer objects
-        System.out.print("Enter player 1's ID: ");
-        int player1ID = scanner.nextInt();
-        System.out.print("Enter player 1's screen name: ");
-        String player1Name = scanner.next();
-        SugarSmashPlayer player1 = new SugarSmashPlayer(player1ID, player1Name);
-
-        System.out.print("Enter player 2's ID: ");
-        int player2ID = scanner.nextInt();
-        System.out.print("Enter player 2's screen name: ");
-        String player2Name = scanner.next();
-        SugarSmashPlayer player2 = new SugarSmashPlayer(player2ID, player2Name);
-
-        // Set and get scores for player1
-        System.out.print("Enter score for " + player1Name + " at level 1: ");
-        int score1Level1 = scanner.nextInt();
-        player1.setScore(score1Level1, 1);
-
-        System.out.print("Enter score for " + player1Name + " at level 2: ");
-        int score1Level2 = scanner.nextInt();
-        player1.setScore(score1Level2, 2);
-
-        // Create PremiumSugarSmashPlayer objects
-        System.out.print("Enter premium player 1's ID: ");
-        int premiumPlayer1ID = scanner.nextInt();
-        System.out.print("Enter premium player 1's screen name: ");
-        String premiumPlayer1Name = scanner.next();
-        PremiumSugarSmashPlayer premiumPlayer1 = new PremiumSugarSmashPlayer(premiumPlayer1ID, premiumPlayer1Name);
-
-        // Set and get scores for premiumPlayer1
-        System.out.print("Enter score for " + premiumPlayer1Name + " at level 1: ");
-        int premiumScore1Level1 = scanner.nextInt();
-        premiumPlayer1.setScore(premiumScore1Level1, 1);
-
-        System.out.print("Enter score for " + premiumPlayer1Name + " at level 2: ");
-        int premiumScore1Level2 = scanner.nextInt();
-        premiumPlayer1.setScore(premiumScore1Level2, 2);
-
-        // Close the scanner
-        scanner.close();
-
-        // Display scores
-        System.out.println(player1.getScreenName() + " - Level 1: " + player1.getScore(1));
-        System.out.println(player1.getScreenName() + " - Level 2: " + player1.getScore(2));
-        System.out.println(premiumPlayer1.getScreenName() + " - Level 1: " + premiumPlayer1.getScore(1));
-        System.out.println(premiumPlayer1.getScreenName() + " - Level 2: " + premiumPlayer1.getScore(2));
-    }
+public class DemoSugarSmashPlayer{
+   public static void main(String[] args){
+      Scanner console = new Scanner(System.in);
+      
+      PremiumSugarSmashPlayer SugarSmashGame = new PremiumSugarSmashPlayer();
+      
+      SugarSmashGame.display();
+      
+   } 
 }
