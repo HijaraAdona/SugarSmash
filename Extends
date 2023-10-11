@@ -1,18 +1,92 @@
+import java.util.Scanner;
+
 public class PremiumSugarSmashPlayer extends SugarSmashPlayer {
-    public PremiumSugarSmashPlayer(int playerID, String screenName) {
-        super(playerID, screenName);
+
+    private int premium;
+    private boolean access;
+    private int[] premiumScores; 
+    private int totalLevels; 
+    Scanner console = new Scanner(System.in);
+
+    public PremiumSugarSmashPlayer() {
+        super();
+        premium = 0;
+        access = false;
+        premiumScores = new int[50]; 
+        totalLevels = 10;
     }
 
-    @Override
-    public void setScore(int level, int score) {
-        if (level < 1 || level > 50) {
-            System.out.println("Error: Invalid level number");
-            return;
+    public PremiumSugarSmashPlayer(int playerId, String screenName, int[] highScores, int premium, boolean access) {
+        super(playerId, screenName, highScores);
+        this.premium = premium;
+        this.access = access;
+        premiumScores = new int[50];
+        totalLevels = 10;
+    }
+
+    public void setPremium(int premium) {
+        this.premium = premium;
+    }
+
+    public int getPremium() {
+        return this.premium;
+    }
+
+    public void setAccess(boolean access) {
+        this.access = access;
+        if (access) {
+            totalLevels += 40;
         }
-        if (level > 1 && score < 100) {
-            System.out.println("Error: You must earn at least 100 points at previous levels.");
-            return;
+    }
+
+    public boolean getAccess() {
+        return this.access;
+    }
+
+    public void display() {
+        super.display();
+
+        System.out.print("Do you want to avail Premium for only 2.99$?\n(Please enter: y/n) ");
+        String choice = console.next();
+
+        if (choice.equalsIgnoreCase("y")) {
+            System.out.print("Enter the cost: ");
+            double cost = console.nextDouble();
+
+            if (cost == 2.99) {
+                setAccess(true); //grant premium access
+                System.out.println("\n<< Premium access granted! \tYou can now set scores for 50 levels i0n premium mode. >>");
+
+                //set scores if the user has earned at least 100 points at all previous levels
+                if (checkPreviousLevels()) {
+                    for (int a = 11; a <= totalLevels; a++) {
+                        System.out.print("Enter the score for level " + a + ": ");
+                        int score = console.nextInt();
+                        premiumScores[a - 11] = score;
+                    }
+
+                    System.out.println("\n<< Premium Level " + getScreenName() + "'s Scores >>");
+                    for (int a = 11; a <= totalLevels; a++) {
+                        System.out.println("Level " + a + ": " + premiumScores[a - 11]);
+                    }
+                } else {
+                    System.out.println("You need to earn at least 100 points at all previous levels to set scores for premium levels.");
+                }
+            } else {
+                System.out.println("The cost you entered is not the exact amount. You're not granted premium access.");
+            }
+        } else {
+            System.out.println("Please try again if want to avail and access premium.");
         }
-        super.setScore(level, score);
+    }
+
+    //to check if the user has earned at least 100 points at all previous levels
+    private boolean checkPreviousLevels() {
+        for (int a = 1; a <= 10; a++) {
+            if (getScore(a) < 100) {
+                return false;
+            }
+        }
+        return true;
     }
 }
